@@ -83,7 +83,7 @@ work/
 
 ### Download Link (GitHub Releases)
 
-- Download dari tab **Releases** di GitHub: https://github.com/LordZein69/Program-POS-Python/releases
+- Download dari tab **Releases** di GitHub: https://github.com/LordZein69/Program-POS-Python/releases/tag/Latest
 - Direct link EXE: [POS.System.exe](https://github.com/LordZein69/Program-POS-Python/releases/download/Latest/POS.System.exe)
 
 ### Download EXE (untuk pengguna)
