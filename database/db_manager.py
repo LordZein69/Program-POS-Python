@@ -108,6 +108,20 @@ class DatabaseManager:
                     (username, password, role),
                 )
 
+        # Insert default products jika tabel produk kosong
+        cursor.execute("SELECT COUNT(*) FROM produk")
+        count = cursor.fetchone()[0]
+        if count == 0:
+            default_products: List[Tuple[str, float, int]] = [
+                ("Apple", 10000.0, 25),
+                ("Pisan", 8000.0, 30),
+            ]
+            for nama, harga, stok in default_products:
+                cursor.execute(
+                    "INSERT INTO produk (nama_produk, harga, stok) VALUES (?, ?, ?)",
+                    (nama, harga, stok),
+                )
+
         conn.commit()
         conn.close()
 
