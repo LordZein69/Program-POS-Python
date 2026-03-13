@@ -39,10 +39,13 @@ class App(ctk.CTk):
         """Inisialisasi aplikasi: setup window, database, dan tema."""
         super().__init__()
         self.title("Sistem POS & Manajemen Inventori")
+        self._is_fullscreen: bool = True
 
-        # Fullscreen/maximized saat startup (robust untuk mode .exe)
+        # Fullscreen saat startup (lebih stabil untuk mode .exe)
         self.after(100, self._apply_startup_fullscreen)
         self.minsize(960, 600)
+        self.bind("<F11>", lambda e: self._toggle_fullscreen())
+        self.bind("<Escape>", lambda e: self._exit_fullscreen())
 
         # Inisialisasi komponen
         self.db: DatabaseManager = DatabaseManager()
@@ -65,21 +68,40 @@ class App(ctk.CTk):
         self._show_login()
 
     def _apply_startup_fullscreen(self) -> None:
-        """Terapkan fullscreen/maximized saat startup dengan fallback.
+        """Terapkan fullscreen saat startup dengan fallback maximize.
 
-        Pada beberapa build .exe, state('zoomed') bisa diabaikan.
-        Jika itu terjadi, gunakan fallback geometry ukuran layar.
+        Pada beberapa build .exe, fullscreen atau zoomed bisa berbeda perilakunya.
+        Coba fullscreen dulu, lalu fallback ke maximize/geometry layar penuh.
         """
         try:
-            self.state("zoomed")
+            self.attributes("-fullscreen", True)
+            self._is_fullscreen = True
         except Exception:
-            pass
+            self._is_fullscreen = False
 
-        # Fallback jika belum benar-benar maximize
-        if self.state() != "zoomed":
+        if not self._is_fullscreen:
+            try:
+                self.state("zoomed")
+            except Exception:
+                pass
+
+        if not self._is_fullscreen and self.state() != "zoomed":
             width = self.winfo_screenwidth()
             height = self.winfo_screenheight()
             self.geometry(f"{width}x{height}+0+0")
+
+    def _toggle_fullscreen(self) -> None:
+        """Toggle fullscreen dengan shortcut F11."""
+        self._is_fullscreen = not self._is_fullscreen
+        self.attributes("-fullscreen", self._is_fullscreen)
+        if not self._is_fullscreen:
+            self.state("zoomed")
+
+    def _exit_fullscreen(self) -> None:
+        """Keluar dari fullscreen dengan tombol Escape."""
+        self._is_fullscreen = False
+        self.attributes("-fullscreen", False)
+        self.state("zoomed")
 
     # ══════════════════════════════════════════════════════
     #  NAVIGATION
