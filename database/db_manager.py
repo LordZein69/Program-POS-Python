@@ -132,7 +132,7 @@ class DatabaseManager:
         conn.close()
         return user
 
-    # ── Produk — CRUD ─────────────────────────────────────
+    # ── Produk ─────────────────────────────────────
     def get_all_produk(self) -> List[Tuple]:
         """Ambil semua data produk dari database.
 
@@ -242,7 +242,7 @@ class DatabaseManager:
 
         Args:
             items: Array (list) of dict berisi data item transaksi.
-                   Setiap dict: {id_produk, nama_produk, harga, qty, subtotal}.
+                    Setiap dict: {id_produk, nama_produk, harga, qty, subtotal}.
 
         Returns:
             ID transaksi yang baru dibuat.
@@ -304,10 +304,10 @@ class DatabaseManager:
         cursor = conn.cursor()
         cursor.execute(
             """SELECT d.id, p.nama_produk, d.qty, p.harga, d.subtotal
-               FROM detail_transaksi d
-               JOIN produk p ON d.id_produk = p.id_produk
-               WHERE d.id_transaksi = ?
-               ORDER BY d.id""",
+                FROM detail_transaksi d
+                JOIN produk p ON d.id_produk = p.id_produk
+                WHERE d.id_transaksi = ?
+                ORDER BY d.id""",
             (id_transaksi,),
         )
         rows = cursor.fetchall()

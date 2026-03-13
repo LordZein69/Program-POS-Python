@@ -61,7 +61,7 @@ class RiwayatView(BaseView):
         ).pack(anchor="w", padx=28, pady=(8, 4))
 
         card_bottom = ctk.CTkFrame(self._parent, fg_color=c["card"], corner_radius=12,
-                                     border_width=1, border_color=c["border"])
+                                      border_width=1, border_color=c["border"])
         card_bottom.pack(fill="both", expand=True, padx=28, pady=(0, 16))
 
         det_cols = [

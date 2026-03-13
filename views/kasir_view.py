@@ -81,7 +81,7 @@ class KasirView(BaseView):
 
         # Product table
         card_left = ctk.CTkFrame(left, fg_color=c["card"], corner_radius=12,
-                                   border_width=1, border_color=c["border"])
+                                    border_width=1, border_color=c["border"])
         card_left.pack(fill="both", expand=True)
 
         columns = [
@@ -376,11 +376,11 @@ class KasirView(BaseView):
             text_color=txt_color
         ).pack(pady=(10, 2))
         ctk.CTkLabel(
-            canvas, text="Jl. Contoh No. 123, Kota",
+            canvas, text="Jl. Ida No. 258, Kota",
             font=(self.font, 10), text_color=muted
         ).pack()
         ctk.CTkLabel(
-            canvas, text="Telp: (021) 123-4567",
+            canvas, text="Telp: (021) 230 030 258",
             font=(self.font, 10), text_color=muted
         ).pack(pady=(0, 8))
 
@@ -535,8 +535,8 @@ class KasirView(BaseView):
         pdf.set_font("Helvetica", "B", 12)
         pdf.cell(w, 5, "TOKO POS", align="C", new_x="LMARGIN", new_y="NEXT")
         pdf.set_font("Helvetica", size=7)
-        pdf.cell(w, 3.5, "Jl. Contoh No. 123, Kota", align="C", new_x="LMARGIN", new_y="NEXT")
-        pdf.cell(w, 3.5, "Telp: (021) 123-4567", align="C", new_x="LMARGIN", new_y="NEXT")
+        pdf.cell(w, 3.5, "Jl. Ida No. 258, Kota", align="C", new_x="LMARGIN", new_y="NEXT")
+        pdf.cell(w, 3.5, "Telp: (021) 230 030 258", align="C", new_x="LMARGIN", new_y="NEXT")
         pdf.ln(2)
 
         # Dashed separator

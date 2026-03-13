@@ -81,7 +81,15 @@ work/
 
 ## Build Executable
 
-Untuk membuat file `.exe`:
+### Download EXE (untuk pengguna)
+
+- File siap pakai: `dist/POS System.exe`
+- Versi ZIP (disarankan untuk distribusi): `dist/POS-System-Windows.zip`
+- Jika project ini di-upload ke GitHub, letakkan file `.exe` di menu **Releases** agar pengguna bisa langsung download tanpa install Python.
+
+### Build EXE sendiri (untuk developer)
+
+Untuk membuat file `.exe` dari source code:
 
 ```bash
 pip install pyinstaller
