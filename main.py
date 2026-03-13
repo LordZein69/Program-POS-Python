@@ -40,8 +40,8 @@ class App(ctk.CTk):
         super().__init__()
         self.title("Sistem POS & Manajemen Inventori")
 
-        # Fullscreen (maximized) saat startup — delay agar window sudah ter-map
-        self.after(50, lambda: self.state("zoomed"))
+        # Fullscreen/maximized saat startup (robust untuk mode .exe)
+        self.after(100, self._apply_startup_fullscreen)
         self.minsize(960, 600)
 
         # Inisialisasi komponen
@@ -63,6 +63,23 @@ class App(ctk.CTk):
 
         self.configure(fg_color=self.theme.colors["bg"])
         self._show_login()
+
+    def _apply_startup_fullscreen(self) -> None:
+        """Terapkan fullscreen/maximized saat startup dengan fallback.
+
+        Pada beberapa build .exe, state('zoomed') bisa diabaikan.
+        Jika itu terjadi, gunakan fallback geometry ukuran layar.
+        """
+        try:
+            self.state("zoomed")
+        except Exception:
+            pass
+
+        # Fallback jika belum benar-benar maximize
+        if self.state() != "zoomed":
+            width = self.winfo_screenwidth()
+            height = self.winfo_screenheight()
+            self.geometry(f"{width}x{height}+0+0")
 
     # ══════════════════════════════════════════════════════
     #  NAVIGATION
