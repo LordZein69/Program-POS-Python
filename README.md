@@ -81,6 +81,10 @@ work/
 
 ## Build Executable
 
+### Download Link (GitHub Releases)
+
+- EXE siap download: https://github.com/LordZein69/Program-POS-Python/releases/download/Main/POS.System.exe
+
 ### Download EXE (untuk pengguna)
 
 - File siap pakai: `dist/POS System.exe`
